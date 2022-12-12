@@ -4,6 +4,7 @@ const wordTextbox = document.querySelector(".word-textbox") as HTMLInputElement;
 const card = document.querySelector(".card");
 const englishCaption = document.querySelector(".english-caption")!;
 const translatedCaption = document.querySelector(".translated-caption")!;
+const nextButton = document.querySelector(".next-button")!;
 //variables
 
 
@@ -13,11 +14,12 @@ wordTextbox.addEventListener("keyup",()=>{
     if(wordTextbox.value===pair[1]){
         document.querySelector<HTMLElement>(".result")!.style.height="50%";
         document.querySelector<HTMLElement>(".front")!.style.boxShadow="0 0 2px 5px #04f06a";
-        setTimeout(()=>{
-            rotate(document.querySelector(".front")!,180);
-            rotate(document.querySelector(".back")!,360);
-        },1000);
     }   
+});
+
+nextButton.addEventListener("click",()=>{
+    rotate(document.querySelector(".front")!,180);
+    rotate(document.querySelector(".back")!,360);
 });
 
 
