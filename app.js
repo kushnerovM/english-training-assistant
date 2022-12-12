@@ -8,10 +8,12 @@ var translatedCaption = document.querySelector(".translated-caption");
 //event listeners
 wordTextbox.addEventListener("keyup", function () {
     if (wordTextbox.value === pair[1]) {
-        //document.querySelector<HTMLElement>(".front")!.style.transform = "perspective(500px) rotateY(180deg)";
-        //document.querySelector<HTMLElement>(".back")!.style.transform = "perspective(500px) rotateY(360deg)";
-        rotate(document.querySelector(".front"), 180);
-        rotate(document.querySelector(".back"), 360);
+        document.querySelector(".result").style.height = "50%";
+        document.querySelector(".front").style.boxShadow = "0 0 2px 5px #04f06a";
+        setTimeout(function () {
+            rotate(document.querySelector(".front"), 180);
+            rotate(document.querySelector(".back"), 360);
+        }, 1000);
     }
 });
 //functions

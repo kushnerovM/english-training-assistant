@@ -11,8 +11,12 @@ const translatedCaption = document.querySelector(".translated-caption")!;
 //event listeners
 wordTextbox.addEventListener("keyup",()=>{
     if(wordTextbox.value===pair[1]){
-        rotate(document.querySelector(".front")!,180);
-        rotate(document.querySelector(".back")!,360);
+        document.querySelector<HTMLElement>(".result")!.style.height="50%";
+        document.querySelector<HTMLElement>(".front")!.style.boxShadow="0 0 2px 5px #04f06a";
+        setTimeout(()=>{
+            rotate(document.querySelector(".front")!,180);
+            rotate(document.querySelector(".back")!,360);
+        },1000);
     }   
 });
 
