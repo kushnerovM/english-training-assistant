@@ -7,9 +7,12 @@ const nextButton = document.querySelector(".next-button")!;
 const checkButton = document.querySelector("#check-btn")!;
 const giveUpButton = document.querySelector("#give-up-btn")!;
 const resultContainer = document.querySelector(".result") as HTMLElement;
+const resultMessage = document.querySelector(".result-message") as HTMLElement;
 
 //variables
 let pair: string [] = ["English","Английский"];
+const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done"];
+const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
 
 //event listeners
 /*wordTextbox.addEventListener("keyup",()=>{
@@ -20,7 +23,9 @@ let pair: string [] = ["English","Английский"];
     }   
 });*/
 
-checkButton.addEventListener("click",check);
+checkButton.addEventListener("click",resultsSummering);
+
+giveUpButton.addEventListener("click",resultsSummering);
 
 nextButton.addEventListener("click",()=>{
     rotate(document.querySelector(".front")!,180);
@@ -29,15 +34,30 @@ nextButton.addEventListener("click",()=>{
 
 //functions
 
+function shuffle(...args:any[]): any[] {
+    let j:number=0;
+    for(let i=args.length-1;i>=0;i--){
+        j=Math.floor(Math.random()*(i+1));
+        [args[j],args[i]]=[args[i],args[j]];
+    }
+    return args
+}
+
 function rotate (elem :HTMLElement,value: number): void {
     elem.style.transform = `perspective(500px) rotateY(${value}deg)`
 }
 
-function check () : void{
-        resultContainer.style.backgroundColor=wordTextbox.value===pair[1]?"#1bcd68":"#ee6352";
-        resultContainer.style.height="50%";
-        (document.querySelector(".result .container") as HTMLElement).style.visibility="visible";
-        (nextButton as HTMLElement).style.opacity="1";
+function resultsSummering (e:Event) : void {
+    let isValid:boolean;
+    if((e.target as HTMLElement).id==="#give-up-btn") {isValid=false;} else{
+        isValid=wordTextbox.value===pair[1];
+    }
+    resultContainer.style.backgroundColor=isValid?"#1bcd68":"#ee6352";
+    resultMessage.textContent=isValid?posResMessages[Math.floor(Math.random()*(posResMessages.length))]:
+        negResMessages[Math.floor(Math.random()*(negResMessages.length))];
+    resultContainer.style.height="50%";
+    (document.querySelector(".result .container") as HTMLElement).style.visibility="visible";
+    (nextButton as HTMLElement).style.opacity="1";
 }
 
 //executable code
