@@ -4,7 +4,7 @@ const card = document.querySelector(".card");
 const englishCaption = document.querySelector(".english-caption")!;
 const translatedCaption = document.querySelector(".translated-caption")!;
 const nextButton = document.querySelector(".next-button")!;
-const checkButton = document.querySelector("#check-btn")!;
+const checkButton = document.querySelector("#check-btn")! as HTMLElement;
 const giveUpButton = document.querySelector("#give-up-btn")!;
 const resultContainer = document.querySelector(".result") as HTMLElement;
 const resultMessage = document.querySelector(".result-message") as HTMLElement;
@@ -15,13 +15,12 @@ const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done
 const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
 
 //event listeners
-/*wordTextbox.addEventListener("keyup",()=>{
-    if(wordTextbox.value===pair[1]){
-        document.querySelector<HTMLElement>(".result")!.style.height="50%";
-        resultContainer.style.visibility="visible";
-        (nextButton as HTMLElement).style.opacity="1";
+wordTextbox.addEventListener("keyup",(e: KeyboardEvent)=>{
+    if(e.key==="Enter"){
+      e.preventDefault();
+      checkButton.click();
     }   
-});*/
+});
 
 checkButton.addEventListener("click",resultsSummering);
 

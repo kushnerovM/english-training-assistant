@@ -13,13 +13,12 @@ var pair = ["English", "Английский"];
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
 var negResMessages = ["Oops!", "Wrong aswer", "Not Quite", "Nope!", "A mistake"];
 //event listeners
-/*wordTextbox.addEventListener("keyup",()=>{
-    if(wordTextbox.value===pair[1]){
-        document.querySelector<HTMLElement>(".result")!.style.height="50%";
-        resultContainer.style.visibility="visible";
-        (nextButton as HTMLElement).style.opacity="1";
+wordTextbox.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        checkButton.click();
     }
-});*/
+});
 checkButton.addEventListener("click", resultsSummering);
 giveUpButton.addEventListener("click", resultsSummering);
 nextButton.addEventListener("click", function () {
