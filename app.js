@@ -8,8 +8,17 @@ var checkButton = document.querySelector("#check-btn");
 var giveUpButton = document.querySelector("#give-up-btn");
 var resultContainer = document.querySelector(".result");
 var resultMessage = document.querySelector(".result-message");
+var rightAnswer = document.querySelector(".right-answer");
 //variables
-var pair = ["English", "Английский"];
+var vocabulary = [
+    ["cat", "кот"],
+    ["hello", "привет"],
+    ["english", "английский"],
+    ["belarusian", "белорусский"],
+    ["table", "стол"]
+];
+vocabulary = shuffle.apply(void 0, vocabulary);
+var pair = vocabulary[0];
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
 var negResMessages = ["Oops!", "Wrong aswer", "Not Quite", "Nope!", "A mistake"];
 //event listeners
@@ -24,6 +33,7 @@ giveUpButton.addEventListener("click", resultsSummering);
 nextButton.addEventListener("click", function () {
     rotate(document.querySelector(".front"), 180);
     rotate(document.querySelector(".back"), 360);
+    //let promise = new Promise()
 });
 //functions
 function shuffle() {
@@ -44,7 +54,7 @@ function rotate(elem, value) {
 }
 function resultsSummering(e) {
     var isValid;
-    if (e.target.id === "#give-up-btn") {
+    if (e.target.id === "give-up-btn") {
         isValid = false;
     }
     else {
@@ -53,6 +63,7 @@ function resultsSummering(e) {
     resultContainer.style.backgroundColor = isValid ? "#1bcd68" : "#ee6352";
     resultMessage.textContent = isValid ? posResMessages[Math.floor(Math.random() * (posResMessages.length))] :
         negResMessages[Math.floor(Math.random() * (negResMessages.length))];
+    rightAnswer.textContent = pair[1];
     resultContainer.style.height = "50%";
     document.querySelector(".result .container").style.visibility = "visible";
     nextButton.style.opacity = "1";
