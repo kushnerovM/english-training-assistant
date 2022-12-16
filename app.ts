@@ -2,7 +2,6 @@
 const wordTextbox = document.querySelector(".word-textbox") as HTMLInputElement;
 const card = document.querySelector(".card");
 const englishCaption = document.querySelector(".english-caption")!;
-const translatedCaption = document.querySelector(".translated-caption")!;
 const nextButton = document.querySelector(".next-button")!;
 const checkButton = document.querySelector("#check-btn")! as HTMLElement;
 const giveUpButton = document.querySelector("#give-up-btn")!;
@@ -18,7 +17,8 @@ let vocabulary: [string,string][]=[
     ["belarusian","белорусский"],
     ["table","стол"]];
 vocabulary = shuffle(...vocabulary);
-let pair: string [] = vocabulary[0];
+let current:number = 0;
+let pair: string [] = vocabulary[current];
 const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done"];
 const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
 
@@ -37,7 +37,26 @@ giveUpButton.addEventListener("click",resultsSummering);
 nextButton.addEventListener("click",()=>{
     rotate(document.querySelector(".front")!,180);
     rotate(document.querySelector(".back")!,360);
-    //let promise = new Promise()
+    let myPromise = new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve("fetched"),1000);
+        current++;
+        pair = vocabulary[current];
+        (document.querySelector(".result .container") as HTMLElement).style.transition="none";
+        (nextButton as HTMLElement).style.transition="none";
+    });
+    myPromise.then(()=>{
+        resultContainer.style.height="0%";
+        resultContainer.style.transition="none";
+        wordTextbox.value="";
+        (document.querySelector(".result .container") as HTMLElement).style.visibility="hidden";
+        (nextButton as HTMLElement).style.opacity="0";
+        englishCaption.textContent=pair[0];
+        (document.querySelector(".result .container") as HTMLElement).style.transition="visibility .3s linear .3s";
+        (nextButton as HTMLElement).style.transition="opacity .3s linear .5s";
+        resultContainer.style.transition="height .3s ease-out .2s";
+        rotate(document.querySelector(".front")!,0);
+        rotate(document.querySelector(".back")!,180);
+    });
 });
 
 //functions
@@ -73,4 +92,3 @@ function resultsSummering (e:Event) : void {
 
 //executable code
 englishCaption.textContent=pair[0];
-translatedCaption.textContent=pair[1];

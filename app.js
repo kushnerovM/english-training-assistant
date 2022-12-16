@@ -2,7 +2,6 @@
 var wordTextbox = document.querySelector(".word-textbox");
 var card = document.querySelector(".card");
 var englishCaption = document.querySelector(".english-caption");
-var translatedCaption = document.querySelector(".translated-caption");
 var nextButton = document.querySelector(".next-button");
 var checkButton = document.querySelector("#check-btn");
 var giveUpButton = document.querySelector("#give-up-btn");
@@ -18,7 +17,8 @@ var vocabulary = [
     ["table", "стол"]
 ];
 vocabulary = shuffle.apply(void 0, vocabulary);
-var pair = vocabulary[0];
+var current = 0;
+var pair = vocabulary[current];
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
 var negResMessages = ["Oops!", "Wrong aswer", "Not Quite", "Nope!", "A mistake"];
 //event listeners
@@ -33,7 +33,26 @@ giveUpButton.addEventListener("click", resultsSummering);
 nextButton.addEventListener("click", function () {
     rotate(document.querySelector(".front"), 180);
     rotate(document.querySelector(".back"), 360);
-    //let promise = new Promise()
+    var myPromise = new Promise(function (resolve, reject) {
+        setTimeout(function () { return resolve("fetched"); }, 1000);
+        current++;
+        pair = vocabulary[current];
+        document.querySelector(".result .container").style.transition = "none";
+        nextButton.style.transition = "none";
+    });
+    myPromise.then(function () {
+        resultContainer.style.height = "0%";
+        resultContainer.style.transition = "none";
+        wordTextbox.value = "";
+        document.querySelector(".result .container").style.visibility = "hidden";
+        nextButton.style.opacity = "0";
+        englishCaption.textContent = pair[0];
+        document.querySelector(".result .container").style.transition = "visibility .3s linear .3s";
+        nextButton.style.transition = "opacity .3s linear .5s";
+        resultContainer.style.transition = "height .3s ease-out .2s";
+        rotate(document.querySelector(".front"), 0);
+        rotate(document.querySelector(".back"), 180);
+    });
 });
 //functions
 function shuffle() {
@@ -70,4 +89,3 @@ function resultsSummering(e) {
 }
 //executable code
 englishCaption.textContent = pair[0];
-translatedCaption.textContent = pair[1];
