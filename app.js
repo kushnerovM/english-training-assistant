@@ -41,8 +41,8 @@ nextButton.addEventListener("click", function () {
         nextButton.style.transition = "none";
     });
     myPromise.then(function () {
-        resultContainer.style.height = "0%";
         resultContainer.style.transition = "none";
+        resultContainer.style.height = "0%";
         wordTextbox.value = "";
         document.querySelector(".result .container").style.visibility = "hidden";
         nextButton.style.opacity = "0";

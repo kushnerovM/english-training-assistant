@@ -45,8 +45,8 @@ nextButton.addEventListener("click",()=>{
         (nextButton as HTMLElement).style.transition="none";
     });
     myPromise.then(()=>{
-        resultContainer.style.height="0%";
         resultContainer.style.transition="none";
+        resultContainer.style.height="0%";
         wordTextbox.value="";
         (document.querySelector(".result .container") as HTMLElement).style.visibility="hidden";
         (nextButton as HTMLElement).style.opacity="0";

@@ -71,7 +71,6 @@ button{
     background-color: #0A014F;
     transition:  1s ease;
     overflow: hidden;
-
 }
 
 .english-caption{
@@ -145,7 +144,8 @@ button{
 }
 
 .back{   
-    /*background-color: #BA2649;   */
-    background-color:#B27092;
-    transform: rotateY(180deg);  
+    background-color:#0A014F;
+    text-align: center;
+    cursor:progress;
+    transform: rotateY(180deg);
 }
