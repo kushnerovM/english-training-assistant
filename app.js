@@ -36,6 +36,9 @@ nextButton.addEventListener("click", function () {
     var myPromise = new Promise(function (resolve, reject) {
         setTimeout(function () { return resolve("fetched"); }, 1000);
         current++;
+        if (current >= vocabulary.length) {
+            current = 0;
+        }
         pair = vocabulary[current];
         document.querySelector(".result .container").style.transition = "none";
         nextButton.style.transition = "none";

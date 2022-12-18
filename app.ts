@@ -40,6 +40,7 @@ nextButton.addEventListener("click",()=>{
     let myPromise = new Promise((resolve,reject)=>{
         setTimeout(()=>resolve("fetched"),1000);
         current++;
+        if(current>=vocabulary.length){ current=0;}
         pair = vocabulary[current];
         (document.querySelector(".result .container") as HTMLElement).style.transition="none";
         (nextButton as HTMLElement).style.transition="none";
