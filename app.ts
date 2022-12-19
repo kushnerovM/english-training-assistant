@@ -70,7 +70,7 @@ function rotate (value: number): void {
 function resultsSummering (e:Event) : void {
     let isValid:boolean;
     if((e.target as HTMLElement).id==="give-up-btn") {isValid=false;} else{
-        isValid=wordTextbox.value===pair[1];
+        isValid=wordTextbox.value.trim().toLocaleLowerCase()===pair[1];
     }
     resultContainer.style.backgroundColor=isValid?"#1bcd68":"#ee6352";
 
