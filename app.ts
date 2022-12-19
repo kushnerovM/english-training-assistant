@@ -35,29 +35,20 @@ checkButton.addEventListener("click",resultsSummering);
 giveUpButton.addEventListener("click",resultsSummering);
 
 nextButton.addEventListener("click",()=>{
-    rotate(document.querySelector(".front")!,180);
-    rotate(document.querySelector(".back")!,360);
-    let myPromise = new Promise((resolve,reject)=>{
-        setTimeout(()=>resolve("fetched"),1000);
+    let cardRotation = ()=>{
+        rotate(180);
+        resultContainer.removeEventListener("transitionend",cardRotation)
+    };
+    resultContainer.addEventListener("transitionend",cardRotation);
+    resultMove (true);
+    setTimeout(()=>{
         current++;
-        if(current>=vocabulary.length){ current=0;}
+        if(current>=vocabulary.length){current=0;}
         pair = vocabulary[current];
-        (document.querySelector(".result .container") as HTMLElement).style.transition="none";
-        (nextButton as HTMLElement).style.transition="none";
-    });
-    myPromise.then(()=>{
-        resultContainer.style.transition="none";
-        resultContainer.style.height="0%";
-        wordTextbox.value="";
-        (document.querySelector(".result .container") as HTMLElement).style.visibility="hidden";
-        (nextButton as HTMLElement).style.opacity="0";
         englishCaption.textContent=pair[0];
-        (document.querySelector(".result .container") as HTMLElement).style.transition="visibility .3s linear .3s";
-        (nextButton as HTMLElement).style.transition="opacity .3s linear .5s";
-        resultContainer.style.transition="height .3s ease-out .2s";
-        rotate(document.querySelector(".front")!,0);
-        rotate(document.querySelector(".back")!,180);
-    });
+        wordTextbox.value="";
+        rotate(0);
+    }, 2000);
 });
 
 //functions
@@ -71,8 +62,9 @@ function shuffle(...args:any[]): any[] {
     return args
 }
 
-function rotate (elem :HTMLElement,value: number): void {
-    elem.style.transform = `perspective(500px) rotateY(${value}deg)`
+function rotate (value: number): void {
+    (document.querySelector(".front") as HTMLElement).style.transform = `perspective(500px) rotateY(${value}deg)`;
+    (document.querySelector(".back") as HTMLElement).style.transform = `perspective(500px) rotateY(${value+180}deg)`;
 }
 
 function resultsSummering (e:Event) : void {
@@ -86,9 +78,19 @@ function resultsSummering (e:Event) : void {
         negResMessages[Math.floor(Math.random()*(negResMessages.length))];
 
     rightAnswer.textContent=pair[1];
-    resultContainer.style.height="50%";
-    (document.querySelector(".result .container") as HTMLElement).style.visibility="visible";
-    (nextButton as HTMLElement).style.opacity="1";
+    resultMove(false);
+}
+
+function resultMove (isVisible:boolean) : void {
+    if(isVisible){
+        resultContainer.style.height="0%";
+        (document.querySelector(".result .container") as HTMLElement).style.display="none";
+        (document.querySelector(".result .container") as HTMLElement).style.opacity="0";
+    } else {
+        resultContainer.style.height="50%";
+        (document.querySelector(".result .container") as HTMLElement).style.display="flex";
+        (document.querySelector(".result .container") as HTMLElement).style.opacity="1";
+    }
 }
 
 //executable code

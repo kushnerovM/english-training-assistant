@@ -42,7 +42,7 @@ button{
     justify-content: center;
     flex-direction: column;
     gap:15px;
-    transition: 0.5s linear;
+    transition: transform .7s linear;
 }
 
 .side h2{
@@ -69,7 +69,7 @@ button{
 
 .front{
     background-color: #0A014F;
-    transition:  1s ease;
+    /*transition:  1s ease;*/
     overflow: hidden;
 }
 
@@ -116,7 +116,7 @@ button{
     background-color:#1bcd68;
     position: absolute;
     bottom:0px;
-    transition: height .3s ease-out .2s;
+    transition: height .3s ease-out;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -124,19 +124,17 @@ button{
 }
 
 .result .container{
-    display: flex;
-    visibility: hidden;
+    display: none;
+    opacity: 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: visibility .3s linear .3s;
+
 }
 
 .result .next-button{
     color:#fff;
     font-size: 1.5em;
-    opacity: 0;
-    transition: opacity .3s linear .5s;
 }
 
 .result .result-message{
