@@ -144,6 +144,5 @@ button{
 .back{   
     background-color:#0A014F;
     text-align: center;
-    cursor:progress;
     transform: rotateY(180deg);
 }

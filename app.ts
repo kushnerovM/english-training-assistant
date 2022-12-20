@@ -18,7 +18,7 @@ let vocabulary: [string,string][]=[
     ["table","стол"]];
 vocabulary = shuffle(...vocabulary);
 let current:number = 0;
-let pair: string [] = vocabulary[current];
+let pair: string [] = shuffle(...vocabulary[current]);
 const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done"];
 const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
 
@@ -44,11 +44,11 @@ nextButton.addEventListener("click",()=>{
     setTimeout(()=>{
         current++;
         if(current>=vocabulary.length){current=0;}
-        pair = vocabulary[current];
+        pair = shuffle(...vocabulary[current]);
         englishCaption.textContent=pair[0];
         wordTextbox.value="";
         rotate(0);
-    }, 2000);
+    }, 1500);
 });
 
 //functions

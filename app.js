@@ -18,7 +18,7 @@ var vocabulary = [
 ];
 vocabulary = shuffle.apply(void 0, vocabulary);
 var current = 0;
-var pair = vocabulary[current];
+var pair = shuffle.apply(void 0, vocabulary[current]);
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
 var negResMessages = ["Oops!", "Wrong aswer", "Not Quite", "Nope!", "A mistake"];
 //event listeners
@@ -42,11 +42,11 @@ nextButton.addEventListener("click", function () {
         if (current >= vocabulary.length) {
             current = 0;
         }
-        pair = vocabulary[current];
+        pair = shuffle.apply(void 0, vocabulary[current]);
         englishCaption.textContent = pair[0];
         wordTextbox.value = "";
         rotate(0);
-    }, 2000);
+    }, 1500);
 });
 //functions
 function shuffle() {
@@ -72,7 +72,7 @@ function resultsSummering(e) {
         isValid = false;
     }
     else {
-        isValid = wordTextbox.value === pair[1];
+        isValid = wordTextbox.value.trim().toLocaleLowerCase() === pair[1];
     }
     resultContainer.style.backgroundColor = isValid ? "#1bcd68" : "#ee6352";
     resultMessage.textContent = isValid ? posResMessages[Math.floor(Math.random() * (posResMessages.length))] :
