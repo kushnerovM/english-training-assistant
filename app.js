@@ -17,6 +17,7 @@ var vocabulary = [
     ["table", "стол"]
 ];
 vocabulary = shuffle.apply(void 0, vocabulary);
+var difficultyFactors = Array(vocabulary.length).fill(1);
 var current = 0;
 var pair = shuffle.apply(void 0, vocabulary[current]);
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
@@ -91,6 +92,18 @@ function resultMove(isVisible) {
         document.querySelector(".result .container").style.display = "flex";
         document.querySelector(".result .container").style.opacity = "1";
     }
+}
+function select(array) {
+    var sum = array.reduce(function (sum, elem) { return sum += elem; });
+    var rand = Math.floor(Math.random() * (sum));
+    rand++;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] >= rand)
+            return i;
+        else
+            rand -= array[i];
+    }
+    return null;
 }
 //executable code
 englishCaption.textContent = pair[0];

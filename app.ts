@@ -17,7 +17,8 @@ let vocabulary: [string,string][]=[
     ["belarusian","белорусский"],
     ["table","стол"]];
 vocabulary = shuffle(...vocabulary);
-let current:number = 0;
+let difficultyFactors : number[] = Array(vocabulary.length).fill(1);
+let current: number = 0;
 let pair: string [] = shuffle(...vocabulary[current]);
 const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done"];
 const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
@@ -92,6 +93,17 @@ function resultMove (isVisible:boolean) : void {
         (document.querySelector(".result .container") as HTMLElement).style.opacity="1";
     }
 }
+
+function select (array: number[]): number|null{
+    const sum:number = array.reduce((sum,elem)=>sum+=elem);
+    let rand: number = Math.floor(Math.random()*(sum));
+    rand++;
+    for (let i=0;i<array.length;i++){
+        if(array[i]>=rand)return i; else
+        rand-=array[i];
+    }
+    return null
+    }
 
 //executable code
 englishCaption.textContent=pair[0];
