@@ -16,9 +16,9 @@ let vocabulary: [string,string][]=[
     ["english","английский"],
     ["belarusian","белорусский"],
     ["table","стол"]];
-vocabulary = shuffle(...vocabulary);
 let difficultyFactors : number[] = Array(vocabulary.length).fill(1);
 let current: number = 0;
+if(selectItem(difficultyFactors)!==null) current=selectItem(difficultyFactors)!;
 let pair: string [] = shuffle(...vocabulary[current]);
 const posResMessages : string[]=["Right!","Exactly","Yep!","Excelent","Well done"];
 const negResMessages : string[]=["Oops!","Wrong aswer","Not Quite","Nope!","A mistake"];
@@ -43,8 +43,7 @@ nextButton.addEventListener("click",()=>{
     resultContainer.addEventListener("transitionend",cardRotation);
     resultMove (true);
     setTimeout(()=>{
-        current++;
-        if(current>=vocabulary.length){current=0;}
+        current=selectItem(difficultyFactors)!;
         pair = shuffle(...vocabulary[current]);
         englishCaption.textContent=pair[0];
         wordTextbox.value="";
@@ -79,6 +78,8 @@ function resultsSummering (e:Event) : void {
         negResMessages[Math.floor(Math.random()*(negResMessages.length))];
 
     rightAnswer.textContent=pair[1];
+    if (difficultyFactors[current]>1&&isValid){ difficultyFactors[current]--;}
+    if (difficultyFactors[current]<=difficultyFactors.length*2&&!isValid){difficultyFactors[current]++;}
     resultMove(false);
 }
 
@@ -94,7 +95,7 @@ function resultMove (isVisible:boolean) : void {
     }
 }
 
-function select (array: number[]): number|null{
+function selectItem (array: number[]): number|null{
     const sum:number = array.reduce((sum,elem)=>sum+=elem);
     let rand: number = Math.floor(Math.random()*(sum));
     rand++;

@@ -16,9 +16,10 @@ var vocabulary = [
     ["belarusian", "белорусский"],
     ["table", "стол"]
 ];
-vocabulary = shuffle.apply(void 0, vocabulary);
 var difficultyFactors = Array(vocabulary.length).fill(1);
 var current = 0;
+if (selectItem(difficultyFactors) !== null)
+    current = selectItem(difficultyFactors);
 var pair = shuffle.apply(void 0, vocabulary[current]);
 var posResMessages = ["Right!", "Exactly", "Yep!", "Excelent", "Well done"];
 var negResMessages = ["Oops!", "Wrong aswer", "Not Quite", "Nope!", "A mistake"];
@@ -39,10 +40,7 @@ nextButton.addEventListener("click", function () {
     resultContainer.addEventListener("transitionend", cardRotation);
     resultMove(true);
     setTimeout(function () {
-        current++;
-        if (current >= vocabulary.length) {
-            current = 0;
-        }
+        current = selectItem(difficultyFactors);
         pair = shuffle.apply(void 0, vocabulary[current]);
         englishCaption.textContent = pair[0];
         wordTextbox.value = "";
@@ -79,6 +77,12 @@ function resultsSummering(e) {
     resultMessage.textContent = isValid ? posResMessages[Math.floor(Math.random() * (posResMessages.length))] :
         negResMessages[Math.floor(Math.random() * (negResMessages.length))];
     rightAnswer.textContent = pair[1];
+    if (difficultyFactors[current] > 1 && isValid) {
+        difficultyFactors[current]--;
+    }
+    if (difficultyFactors[current] <= difficultyFactors.length * 2 && !isValid) {
+        difficultyFactors[current]++;
+    }
     resultMove(false);
 }
 function resultMove(isVisible) {
@@ -93,7 +97,7 @@ function resultMove(isVisible) {
         document.querySelector(".result .container").style.opacity = "1";
     }
 }
-function select(array) {
+function selectItem(array) {
     var sum = array.reduce(function (sum, elem) { return sum += elem; });
     var rand = Math.floor(Math.random() * (sum));
     rand++;
