@@ -85,10 +85,12 @@ function resultsSummering (e:Event) : void {
 
 function resultMove (isVisible:boolean) : void {
     if(isVisible){
+        (document.querySelector(".control-group")as HTMLElement).style.display="flex";
         resultContainer.style.height="0%";
         (document.querySelector(".result .container") as HTMLElement).style.display="none";
         (document.querySelector(".result .container") as HTMLElement).style.opacity="0";
     } else {
+        (document.querySelector(".control-group")as HTMLElement).style.display="none";
         resultContainer.style.height="50%";
         (document.querySelector(".result .container") as HTMLElement).style.display="flex";
         (document.querySelector(".result .container") as HTMLElement).style.opacity="1";

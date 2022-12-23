@@ -87,11 +87,13 @@ function resultsSummering(e) {
 }
 function resultMove(isVisible) {
     if (isVisible) {
+        document.querySelector(".control-group").style.display = "flex";
         resultContainer.style.height = "0%";
         document.querySelector(".result .container").style.display = "none";
         document.querySelector(".result .container").style.opacity = "0";
     }
     else {
+        document.querySelector(".control-group").style.display = "none";
         resultContainer.style.height = "50%";
         document.querySelector(".result .container").style.display = "flex";
         document.querySelector(".result .container").style.opacity = "1";
