@@ -1,6 +1,5 @@
 //elements
 const wordTextbox = document.querySelector(".word-textbox") as HTMLInputElement;
-const card = document.querySelector(".card");
 const englishCaption = document.querySelector(".english-caption")!;
 const nextButton = document.querySelector(".next-button")!;
 const checkButton = document.querySelector("#check-btn")! as HTMLElement;
@@ -16,6 +15,8 @@ let vocabulary: [string,string][]=[
     ["english","английский"],
     ["belarusian","белорусский"],
     ["table","стол"]];
+
+//difficulties array contains difficulty-coefficient from 1 to 10
 let difficultyFactors : number[] = Array(vocabulary.length).fill(1);
 let current: number = 0;
 if(selectItem(difficultyFactors)!==null) current=selectItem(difficultyFactors)!;
@@ -35,6 +36,7 @@ checkButton.addEventListener("click",resultsSummering);
 
 giveUpButton.addEventListener("click",resultsSummering);
 
+//while the data of a new word-pair is being loaded, the card turns around and turns back after loading
 nextButton.addEventListener("click",()=>{
     let cardRotation = ()=>{
         rotate(180);
@@ -97,6 +99,7 @@ function resultMove (isVisible:boolean) : void {
     }
 }
 
+//function takse an array of numbers and returns random one, but probability of number-selection of bigger number is larger 
 function selectItem (array: number[]): number|null{
     const sum:number = array.reduce((sum,elem)=>sum+=elem);
     let rand: number = Math.floor(Math.random()*(sum));

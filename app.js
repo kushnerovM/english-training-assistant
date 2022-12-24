@@ -1,6 +1,5 @@
 //elements
 var wordTextbox = document.querySelector(".word-textbox");
-var card = document.querySelector(".card");
 var englishCaption = document.querySelector(".english-caption");
 var nextButton = document.querySelector(".next-button");
 var checkButton = document.querySelector("#check-btn");
@@ -16,6 +15,7 @@ var vocabulary = [
     ["belarusian", "белорусский"],
     ["table", "стол"]
 ];
+//difficulties array contains difficulty-coefficient from 1 to 10
 var difficultyFactors = Array(vocabulary.length).fill(1);
 var current = 0;
 if (selectItem(difficultyFactors) !== null)
@@ -32,6 +32,7 @@ wordTextbox.addEventListener("keyup", function (e) {
 });
 checkButton.addEventListener("click", resultsSummering);
 giveUpButton.addEventListener("click", resultsSummering);
+//while the data of a new word-pair is being loaded, the card turns around and turns back after loading
 nextButton.addEventListener("click", function () {
     var cardRotation = function () {
         rotate(180);
@@ -99,6 +100,7 @@ function resultMove(isVisible) {
         document.querySelector(".result .container").style.opacity = "1";
     }
 }
+//function takse an array of numbers and returns random one, but probability of number-selection of bigger number is larger 
 function selectItem(array) {
     var sum = array.reduce(function (sum, elem) { return sum += elem; });
     var rand = Math.floor(Math.random() * (sum));
